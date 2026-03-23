@@ -1,0 +1,230 @@
+/* button:focus {
+    outline: 2px solid blue; /* Example: Adds a blue outline when focused */
+    /* box-shadow: 0 0 0 3px rgba(0, 0, 255, 0.3); Example: Adds a subtle shadow */
+/* } */
+
+/* * {
+    margin-bottom: 1rem;
+} */
+
+* {
+    color: #272a32;
+    caret-color: transparent;
+}
+
+body {
+    background-color: #dad4c9;
+}
+
+.todaysWord {
+    margin: auto;
+    text-align: center;
+    font-size: 32px;
+}
+
+.todaysWordHidden {
+    visibility: hidden;
+}
+
+.maddiedleTitle {
+    text-align: center;
+    font-size: 64px;
+    margin-top: 8rem;
+    margin-bottom: 3rem;
+    color: #272a32
+}
+
+.footerBanner {
+    position: absolute;
+    bottom: 5px;
+    right: 5px;
+}
+
+.letterGrid {
+    text-align: center;
+}
+
+.letterInput {
+    width: 64px;
+    height: 64px;
+    font-size: 48px;
+    text-align: center;
+    margin: 4px;
+
+    border: 2px solid #272a32;
+    border-radius: 4px;
+    background-color: #dad4c9;
+
+    cursor: pointer;
+}
+
+.letterInput:focus {
+    outline: none !important;
+    border:1px solid #55927f;
+    box-shadow: 0 0 10px #55927f;
+}
+
+.letterCorrect {
+    background-color: #339c5e;
+}
+
+.letterIncorrect {
+    background-color: rgb(148, 148, 148)
+}
+
+.letterMaybe {
+    background-color: rgb(255, 230, 120);
+}
+
+.columnContainer {
+    display: grid;
+    /* max-width: 1200px; */
+    grid-template-columns: 350px 400px 100px;
+    height: 90%;
+    column-gap: 10px;
+    float: left;
+}
+
+.columnThree, .columnTwo, .columnOne {
+    float: left;
+    height: 100%;
+    overflow-y: auto;
+    border: 1px solid red;
+}
+
+
+.questionsDiv, .resourcesDiv, .goalDiv {
+    padding: 10px;
+    border: 1px solid black;
+    margin-bottom: 1rem;
+}
+
+.gameStudioDiv {
+    padding: 10px;
+    border: 1px solid black;
+    margin-bottom: 1rem;
+    height: 200px;
+}
+
+.upgradeRow {
+    width: 100%;
+    display:flex;
+    align-items: center;
+}
+
+.upgradeRowMainText {
+    border: 1px solid blue;
+    width: 100%;
+}   
+
+.upgradeRowStat {
+    border: 1px solid red;
+    white-space: nowrap;
+}
+
+.upgradeRowProgress {
+    border: 1px solid rgb(169, 108, 168);
+    margin-left: 1rem; 
+    min-width: 30%;
+}
+.rightAligned {
+    display: block;
+    float: right;
+}
+
+.centeredButton {
+    display: block;
+    width: 80%;
+    margin: auto;
+}
+.readButton {
+    display: block;
+    width: 80%;
+    margin: auto;
+    margin-bottom: 1rem;
+}
+
+.headerOne {
+    font-size: 1.5rem;
+    font-weight: 800;
+}
+
+.headerTwo {
+    font-size: 1rem;
+    font-weight: 800;
+}
+
+.headerThree {
+    font-size: 1rem;
+    font-weight: 800;
+}
+
+#eventMessages {
+    border: 1px solid black;
+    height: 150px; 
+    overflow-y: auto;
+}
+
+#eventMessage {
+    animation: fadeIn 1s ease-in forwards;
+    padding: 10 10 10 10;
+}
+
+#thoughts {
+    animation: fadeIn 1s ease-in forwards;
+}
+
+
+.tab-buttons button {
+  background: none;
+  border: none;
+  padding: 2px 6px 2px 6px ;
+  margin: 0 8px;
+  color: #000000;
+  cursor: pointer;
+  font: inherit;
+  /* text-decoration: underline; */
+}
+
+.tab-buttons button.active {
+  background: #383a54;
+  color: white;
+}
+
+.tab-content {
+  margin-top: 10px;
+  /* border: 1px solid #ddd; */
+  /* padding: 10px; */
+}
+
+progress {
+    float: right;
+  border: 1px solid rgb(49, 47, 47);
+}
+progress::-webkit-progress-bar {
+  background-color: #ffffff;
+}
+progress::-webkit-progress-value {
+  background-color: #000000;
+}
+progress::-moz-progress-bar {
+  /* style rules */
+}
+
+/* ANIMATIONS */
+
+@keyframes fadeIn {
+    0% {
+        opacity: 0; /* Start completely transparent */
+    }
+    100% {
+        opacity: 1; /* End fully opaque */
+    }
+}
+
+@media (max-width: 1200px) {
+  .letterInput {
+    width: 120px;
+    height: 120px;
+  }
+}

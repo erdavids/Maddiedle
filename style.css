@@ -8,6 +8,9 @@
 } */
 
 * {
+      font-family: "Crimson Text", serif;
+    font-weight: 400;
+    font-style: normal;
     color: #272a32;
     caret-color: transparent;
 }
@@ -46,8 +49,8 @@ body {
 }
 
 .letterInput {
-    width: 64px;
-    height: 64px;
+    /* width: 64px;
+    height: 64px; */
     font-size: 48px;
     text-align: center;
     margin: 4px;
@@ -227,9 +230,9 @@ progress::-moz-progress-bar {
     }
 }
 
-@media (max-width: 1200px) {
+/* @media (max-width: 1200px) {
   .letterInput {
     width: 120px;
     height: 120px;
   }
-}
+} */

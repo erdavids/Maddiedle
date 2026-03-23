@@ -34,6 +34,7 @@ async function loadDictionary() {
 
 function setupMaddiedle() {
   const letterGrid = document.getElementById("letterGrid")
+  const windowWidth = window.innerWidth;
 
   for (let i = 0; i < 6; i++) {
     const row = document.createElement("div")
@@ -45,6 +46,12 @@ function setupMaddiedle() {
       text_input.classList.add("letterInput")
       text_input.enterKeyHint = "done"
       text_input.disabled = i != 0;
+
+      const input_size = Math.min(85, ((windowWidth / todays_word.length) - (todays_word.length * 6))) + 'px';
+      text_input.style.width = input_size 
+      text_input.style.height = input_size
+      text_input.style.fontSize = input_size * .85
+
       row.appendChild(text_input)
     }
     letterGrid.appendChild(row)

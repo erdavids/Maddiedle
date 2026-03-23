@@ -31,7 +31,8 @@ body {
     font-size: 64px;
     margin-top: 8rem;
     margin-bottom: 3rem;
-    color: #272a32
+    color: #55927f;
+    text-shadow: 2 20 15px #21525a;
 }
 
 .footerBanner {
@@ -51,11 +52,15 @@ body {
     text-align: center;
     margin: 4px;
 
-    border: 2px solid #272a32;
+    border: 2px solid #55927f;
     border-radius: 4px;
     background-color: #dad4c9;
 
     cursor: pointer;
+}
+
+.letterInput:disabled {
+    border: 1px solid #55927f;
 }
 
 .letterInput:focus {
@@ -69,7 +74,7 @@ body {
 }
 
 .letterIncorrect {
-    background-color: rgb(148, 148, 148)
+    background-color:#9b9b9b
 }
 
 .letterMaybe {

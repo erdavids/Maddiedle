@@ -44,34 +44,37 @@ function setupMaddiedle() {
       text_input.maxLength = 1;
       text_input.classList.add("letterInput")
       text_input.enterKeyHint = "done"
+      text_input.disabled = i != 0;
       row.appendChild(text_input)
     }
     letterGrid.appendChild(row)
   }
+
+
 
   console.log(words_dictionary)
 
 
 }
 
-document.addEventListener("input", function(event) {
-  if (event.inputType === 'deleteContentBackward') {
-    if (event.target.classList.contains("letterInput")) {
-      const input = event.target
-      input.value = ""
-      const nextInput = event.target.previousElementSibling;
-      if (nextInput && nextInput.classList.contains("letterInput")) {
-        nextInput.focus();
-      }
-    }
-  } else if (event.target.classList.contains("letterInput")) {
-    const nextInput = event.target.nextElementSibling;
-    if (nextInput && nextInput.classList.contains("letterInput")) {
-      console.log("NEXT!!!")
-      nextInput.focus();
-    }
-  }
-})
+// document.addEventListener("input", function(event) {
+//   if (event.inputType === 'deleteContentBackward') {
+//     if (event.target.classList.contains("letterInput")) {
+//       const input = event.target
+//       input.value = ""
+//       const nextInput = event.target.previousElementSibling;
+//       if (nextInput && nextInput.classList.contains("letterInput")) {
+//         nextInput.focus();
+//       }
+//     }
+//   } else if (event.target.classList.contains("letterInput")) {
+//     const nextInput = event.target.nextElementSibling;
+//     if (nextInput && nextInput.classList.contains("letterInput")) {
+//       console.log("NEXT!!!")
+//       nextInput.focus();
+//     }
+//   }
+// })
 
 // document.addEventListener("click", function (event) {
 //   const el = event.target;
@@ -120,6 +123,7 @@ document.addEventListener("keydown", function(event) {
 
     let current_guess = "";
     inputs.forEach(input => {
+      input.disabled = true;
       current_guess += input.value.toLowerCase();
     });
 
@@ -148,6 +152,10 @@ document.addEventListener("keydown", function(event) {
 
     const nextRow = currentRow.nextElementSibling;
     if (nextRow) {
+      // enable all the inputs?
+      for (const child of nextRow.children) {
+        child.disabled = false;
+      }
       nextRow.querySelector(".letterInput").focus();
     }
   }

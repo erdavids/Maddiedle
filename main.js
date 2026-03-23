@@ -1,4 +1,4 @@
-const valid_words = ["grasps", "hasps", "knosps", "risps", "cusps", "galliwasps", "handclasps", "clasps", "enclasps", "gasps", "handgrasps", "jasps", "rasps", "unclasps", "wisps", "crisps", "wasps"]
+const valid_words = ["grasps", "hasps", "knosps", "risps", "cusps", "galliwasps", "handclasps", "clasps", "wisps", "gasps", "handgrasps", "jasps", "rasps", "unclasps", "enclasps", "crisps", "wasps"]
 
 const rows_completed = 0;
 
@@ -160,6 +160,23 @@ document.addEventListener("keydown", function(event) {
     }
   }
 });
+
+document.addEventListener("input", function(event) {
+  const el = event.target;
+  if (!el.classList.contains("letterInput")) return;
+
+  // Ensure only 1 char (mobile can paste or suggest words)
+  el.value = el.value.slice(0, 1);
+
+  // Move forward if a letter was entered
+  if (el.value !== "") {
+    const nextInput = el.nextElementSibling;
+    if (nextInput && nextInput.classList.contains("letterInput")) {
+      nextInput.focus();
+    }
+  }
+});
+
 
 window.onload = async function () {
   await loadDictionary();

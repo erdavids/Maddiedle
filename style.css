@@ -8,9 +8,9 @@
 } */
 
 * {
-      font-family: "Crimson Text", serif;
-    font-weight: 400;
-    font-style: normal;
+  font-family: "Bree Serif", serif;
+  font-weight: 400;
+  font-style: normal;
     color: #272a32;
     caret-color: transparent;
 }
@@ -22,7 +22,7 @@ body {
 .todaysWord {
     margin: auto;
     text-align: center;
-    font-size: 32px;
+    color: #55927f;
 }
 
 .todaysWordHidden {
@@ -31,17 +31,16 @@ body {
 
 .maddiedleTitle {
     text-align: center;
-    font-size: 64px;
+    
     margin-top: 8rem;
     margin-bottom: 3rem;
     color: #55927f;
-    text-shadow: 2 20 15px #21525a;
 }
 
 .footerBanner {
     position: absolute;
-    bottom: 5px;
-    right: 5px;
+    bottom: 25px;
+    right: 25px;
 }
 
 .letterGrid {

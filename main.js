@@ -2,6 +2,8 @@ const valid_words = ["grasps", "hasps", "knosps", "risps", "cusps", "galliwasps"
 
 const rows_completed = 0;
 
+let input_size = "64px"
+
 function getDailyWord(valid_words) {
   const today = new Date().toISOString().slice(0, 10); // "2026-03-23"
 
@@ -35,7 +37,7 @@ async function loadDictionary() {
 function setupMaddiedle() {
   const letterGrid = document.getElementById("letterGrid")
   const windowWidth = window.innerWidth;
-
+    input_size = Math.min(85, ((windowWidth / todays_word.length) - ((todays_word.length - 2) * 4))) + 'px';
   for (let i = 0; i < 6; i++) {
     const row = document.createElement("div")
     row.classList.add("letterRow")
@@ -47,7 +49,7 @@ function setupMaddiedle() {
       text_input.enterKeyHint = "done"
       text_input.disabled = i != 0;
 
-      const input_size = Math.min(85, ((windowWidth / todays_word.length) - (todays_word.length * 6))) + 'px';
+
       text_input.style.width = input_size 
       text_input.style.height = input_size
       text_input.style.fontSize = input_size * .85
@@ -57,6 +59,11 @@ function setupMaddiedle() {
     letterGrid.appendChild(row)
   }
 
+  const title = document.getElementById('maddiedleTitle')
+  title.style.fontSize = input_size;
+
+  const tw = document.getElementById('todaysWord')
+  tw.style.fontSize = input_size;
 
 
   console.log(words_dictionary)
@@ -130,7 +137,6 @@ document.addEventListener("keydown", function(event) {
 
     let current_guess = "";
     inputs.forEach(input => {
-      input.disabled = true;
       current_guess += input.value.toLowerCase();
     });
 
@@ -149,6 +155,7 @@ document.addEventListener("keydown", function(event) {
         } else {
           input.classList.add("letterIncorrect");
         }
+        input.disabled = true;
       });
 
       if (current_guess === todays_word) {
@@ -164,6 +171,9 @@ document.addEventListener("keydown", function(event) {
         child.disabled = false;
       }
       nextRow.querySelector(".letterInput").focus();
+    } else {
+        const display = document.getElementById('todaysWord');
+        display.classList.remove('todaysWordHidden');
     }
   }
 });

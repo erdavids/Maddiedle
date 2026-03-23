@@ -140,6 +140,8 @@ document.addEventListener("keydown", function(event) {
       current_guess += input.value.toLowerCase();
     });
 
+    current_guess = current_guess.replace(" ", "");
+    console.log(current_guess)
     if (current_guess.length === todays_word.length) {
 
       if (!words_dictionary.has(current_guess)) {
@@ -162,6 +164,8 @@ document.addEventListener("keydown", function(event) {
         const display = document.getElementById('todaysWord');
         display.classList.remove('todaysWordHidden');
       }
+    } else {
+      return;
     }
 
     const nextRow = currentRow.nextElementSibling;

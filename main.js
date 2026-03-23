@@ -1,5 +1,7 @@
 const valid_words = ["grasps", "hasps", "knosps", "risps", "cusps", "galliwasps", "handclasps", "clasps", "enclasps", "gasps", "handgrasps", "jasps", "rasps", "unclasps", "wisps", "crisps", "wasps"]
 
+const rows_completed = 0;
+
 function getDailyWord(valid_words) {
   const today = new Date().toISOString().slice(0, 10); // "2026-03-23"
 
@@ -41,6 +43,7 @@ function setupMaddiedle() {
       text_input.type = 'text'
       text_input.maxLength = 1;
       text_input.classList.add("letterInput")
+      text_input.enterKeyHint = "done"
       row.appendChild(text_input)
     }
     letterGrid.appendChild(row)
@@ -70,61 +73,85 @@ document.addEventListener("input", function(event) {
   }
 })
 
-document.addEventListener("click", function (event) {
+// document.addEventListener("click", function (event) {
+//   const el = event.target;
+
+//   if (el.tagName === "INPUT" || el.tagName === "TEXTAREA") {
+//     const length = el.value.length;
+//     el.setSelectionRange(length, length);
+//   }
+// });
+document.addEventListener("keydown", function(event) {
   const el = event.target;
 
-  if (el.tagName === "INPUT" || el.tagName === "TEXTAREA") {
-    const length = el.value.length;
-    el.setSelectionRange(length, length);
-  }
-});
+  if (!el.classList.contains("letterInput")) return;
 
-document.addEventListener("keydown", function(event) {
+  // LETTER INPUT
+  if (event.key.length === 1) {
+    event.preventDefault(); // stop normal typing
+
+    el.value = event.key;
+
+    const nextInput = el.nextElementSibling;
+    if (nextInput && nextInput.classList.contains("letterInput")) {
+      nextInput.focus();
+    }
+  }
+
+  // BACKSPACE
+  if (event.key === "Backspace") {
+    event.preventDefault();
+
+    if (el.value === "") {
+      const prevInput = el.previousElementSibling;
+      if (prevInput && prevInput.classList.contains("letterInput")) {
+        prevInput.focus();
+        prevInput.value = "";
+      }
+    } else {
+      el.value = "";
+    }
+  }
+
+  // ENTER (your existing logic stays mostly the same)
   if (event.key === "Enter") {
-    const currentRow = event.target.parentElement;
-    const inputs = currentRow.querySelectorAll(".letterInput")
+    const currentRow = el.parentElement;
+    const inputs = currentRow.querySelectorAll(".letterInput");
 
     let current_guess = "";
     inputs.forEach(input => {
-      current_guess += input.value.toLowerCase()
-    })
+      current_guess += input.value.toLowerCase();
+    });
 
     if (current_guess.length === todays_word.length) {
 
-      console.log("check valid")
-      // See if current guess is a valid word
       if (!words_dictionary.has(current_guess)) {
-        console.log("NOT IN THE LIST")
+        console.log("NOT IN THE LIST");
         return;
       }
 
-      console.log("seems valid")
-
       inputs.forEach((input, index) => {
         if (input.value.toLowerCase() === todays_word[index]) {
-          input.classList.add("letterCorrect")
+          input.classList.add("letterCorrect");
         } else if (todays_word.includes(input.value.toLowerCase())) {
-          input.classList.add("letterMaybe")
+          input.classList.add("letterMaybe");
         } else {
-          input.classList.add("letterIncorrect")
+          input.classList.add("letterIncorrect");
         }
-      })
+      });
 
       if (current_guess === todays_word) {
-        const display = document.getElementById('todaysWord')
-        display.classList.remove('todaysWordHidden')
+        const display = document.getElementById('todaysWord');
+        display.classList.remove('todaysWordHidden');
       }
     }
 
-    if (currentRow) {
-      const nextRow = currentRow.nextElementSibling
-      if (nextRow) {
-        nextRow.querySelector(".letterInput").focus()
-      }
+    const nextRow = currentRow.nextElementSibling;
+    if (nextRow) {
+      nextRow.querySelector(".letterInput").focus();
     }
   }
-})
-
+});
 
 window.onload = async function () {
   await loadDictionary();

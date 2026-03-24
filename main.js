@@ -4,7 +4,6 @@ const valid_words = [
   "knosps",
   "risps",
   "cusps",
-  "galliwasps",
   "handclasps",
   "clasps",
   "wisps",
@@ -23,16 +22,26 @@ const rows_completed = 0;
 let input_size = "64px";
 
 function getDailyWord(valid_words) {
-  const today = new Date().toISOString().slice(0, 10); // "2026-03-23"
+  const today = new Date().toISOString().slice(0, 10); // "YYYY-MM-DD"
 
-  // Simple hash function
-  let hash = 0;
+  // Convert date string to numeric seed
+  let seed = 0;
   for (let i = 0; i < today.length; i++) {
-    hash = (hash << 5) - hash + today.charCodeAt(i);
-    hash |= 0; // Convert to 32-bit int
+    seed = seed * 31 + today.charCodeAt(i);
   }
 
-  const index = Math.abs(hash) % valid_words.length;
+  // Seeded random generator (mulberry32)
+  function mulberry32(a) {
+    return function () {
+      let t = (a += 0x6D2B79F5);
+      t = Math.imul(t ^ (t >>> 15), t | 1);
+      t ^= t + Math.imul(t ^ (t >>> 7), t | 61);
+      return ((t ^ (t >>> 14)) >>> 0) / 4294967296;
+    };
+  }
+
+  const rand = mulberry32(seed);
+  const index = Math.floor(rand() * valid_words.length);
 
   // set word in reveal
   const wordElement = document.getElementById("todaysWord");
